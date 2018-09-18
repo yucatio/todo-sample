@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
+import { firebaseReducer } from 'react-redux-firebase'
 import visiblityFilter from './visiblityFilter'
 
 export default combineReducers({
-  todos,
+  firebase: firebaseReducer,
   visiblityFilter
 })

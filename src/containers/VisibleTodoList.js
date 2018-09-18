@@ -1,21 +1,41 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { firebaseConnect } from 'react-redux-firebase'
 import { toggleTodo } from '../actions'
 import TodoList from '../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
-      return todos
+      return todos;
     case 'SHOW_COMPLETED':
-      return todos.filter(t => t.completed)
+      return Object.keys(todos).reduce(
+          (filtered, key) => {
+            if (todos[key].completed) {
+              filtered[key] = todos[key];
+            }
+            return filtered;
+          },
+          {}
+        )
     case 'SHOW_ACTIVE':
-      return todos.filter(t => !t.completed)
+      return Object.keys(todos).reduce(
+          (filtered, key) => {
+            if (!todos[key].completed) {
+              filtered[key] = todos[key];
+            }
+            return filtered;
+          },
+          {}
+        )
+    default :
+        return todos;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    todos: getVisibleTodos(state.todos, state.visiblityFilter)
+    todos: getVisibleTodos(state.firebase.data.todos, state.visiblityFilter)
   }
 }
 
@@ -27,9 +47,13 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const VisibleTodoList = connect(
+const VisibleTodoList = compose(
+  firebaseConnect([
+      'todos'
+    ]),
+  connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList)
+))(TodoList)
 
 export default VisibleTodoList;

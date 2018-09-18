@@ -1,23 +1,27 @@
 import React from 'react'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
 import Todo from './Todo'
 
-const TodoList = ({todos, onTodoClick}) => (
-  <ul>
-    {todos.map((todo, index) => (
-      <Todo key={index} {...todo} onClick={() => onTodoClick(index)} />
-    ))}
-  </ul>
-)
+const TodoList = ({todos, onTodoClick}) => {
+  if (!isLoaded(todos)) {
+    return <div>Loading...</div>
+  }
+  if (isEmpty(todos)) {
+    return <div>Todos List Is Empty</div>
+  }
+
+  return (<ul>
+    {Object.keys(todos).map(
+        (key) => (
+          <Todo key={key} {...todos[key]} onClick={() => onTodoClick(key)}/>
+        )
+      )}
+  </ul>)
+}
 
 TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      completed: PropTypes.bool.isRequired,
-      text: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
+  todos: PropTypes.object,
   onTodoClick: PropTypes.func.isRequired
 }
 
