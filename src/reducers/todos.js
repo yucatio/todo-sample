@@ -23,7 +23,7 @@ const todos = (state = {}, action) => {
       return {...state, notice:
         '"' + action.text + '"の更新中にエラーが発生しました。'}
     case 'NOT_AUTHENTICATED_ON_TODO_ACTION' :
-    return {...state, notice: 'タスクを追加・変更するにはログインしてください'}
+      return {...state, notice: 'タスクを追加・変更するにはログインしてください'}
     default:
       return {...state, notice: ''}
   }
