@@ -6,9 +6,11 @@ let NoticeForTodo = ({ notice }) => {
   if (! notice) {
     return '';
   }
-  return (<div>
-    {notice}
-  </div>)
+  return (
+    <div>
+      {notice}
+    </div>
+  )
 }
 
 NoticeForTodo.propTypes = {

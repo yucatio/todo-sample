@@ -10,15 +10,18 @@ const TodoList = ({uid, todos, onTodoClick}) => {
   if (isEmpty(todos)) {
     return <div>タスクリストが空です。</div>
   }
-  return (<ul>
-    {Object.keys(todos).map(
+  return (
+    <ul>
+      {Object.keys(todos).map(
         (key) => (
-          <Todo key={key} {...todos[key]} onClick={() => onTodoClick(uid, key)}/>
+          <Todo
+            key={key} {...todos[key]}
+            onClick={() => onTodoClick(uid, key)} />
         )
       )}
-  </ul>)
+    </ul>
+  )
 }
-
 
 TodoList.propTypes = {
   uid: PropTypes.string.isRequired,

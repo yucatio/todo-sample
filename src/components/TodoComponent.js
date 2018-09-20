@@ -16,11 +16,12 @@ let TodoComponent = ({uid, authenticating, authenticated}) => {
   }
   return (
     <div>
-      <AddTodo uid={uid}/>
+      <AddTodo uid={uid} />
       <NoticeForTodo />
       <VisibleTodoList uid={uid} />
       <Footer />
-    </div>)
+    </div>
+  )
 }
 
 TodoComponent.propTypes = {
@@ -30,13 +31,13 @@ TodoComponent.propTypes = {
 }
 
 const mapStateToProps = ({firebase: {auth, auth: {uid}, data : {todos}}}) => ({
-    uid,
-    authenticating:  !isLoaded(auth),
-    authenticated: !isEmpty(auth)
-  })
+  uid,
+  authenticating:  !isLoaded(auth),
+  authenticated: !isEmpty(auth)
+})
 
 TodoComponent = connect(
-    mapStateToProps
+  mapStateToProps
 )(TodoComponent)
 
 export default TodoComponent;
