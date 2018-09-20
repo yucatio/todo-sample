@@ -22,8 +22,10 @@ const todos = (state = {}, action) => {
     case 'TOGGLE_TODO_ERROR' :
       return {...state, notice:
         '"' + action.text + '"の更新中にエラーが発生しました。'}
+    case 'NOT_AUTHENTICATED_ON_TODO_ACTION' :
+    return {...state, notice: 'タスクを追加・変更するにはログインしてください'}
     default:
-      return state
+      return {...state, notice: ''}
   }
 }
 

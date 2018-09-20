@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const createStoreWithFirebase = compose(
   applyMiddleware(thunk.withExtraArgument({getFirebase})),
-  reactReduxFirebase(firebase, {})
+  reactReduxFirebase(firebase, {userProfile: 'users'})
 )(createStore);
 
 const store = createStoreWithFirebase(todoApp);
