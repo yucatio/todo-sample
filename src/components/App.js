@@ -1,16 +1,26 @@
 import React from 'react'
-import Footer from './Footer'
-import AddTodo from '../containers/AddTodo'
-import VisibleTodoList from '../containers/VisibleTodoList'
-import NoticeForTodoContainer from '../containers/NoticeForTodoContainer'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Login from './Login'
+import TodoComponent from './TodoComponent'
 
-const App = () => (
+let App = ({uid}) => (
   <div>
-    <AddTodo />
-    <NoticeForTodoContainer />
-    <VisibleTodoList />
-    <Footer />
+    <Login />
+    <TodoComponent uid={uid} />
   </div>
 )
+
+App.propTypes = {
+  uid: PropTypes.string
+}
+
+const mapStateToProps = state => ({
+  uid: state.firebase.auth.uid
+});
+
+App = connect(
+  mapStateToProps
+)(App)
 
 export default App;
