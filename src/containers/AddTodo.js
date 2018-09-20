@@ -1,14 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { isEmpty } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
 import { addTodo } from '../actions/todoActions'
 
-let AddTodo = ({ authenticated, uid, dispatch }) => {
-  if (!authenticated) {
-    return '';
-  }
-  let input
+let AddTodo = ({uid, dispatch }) => {
+  let input;
 
   return (
     <div>
@@ -36,15 +32,9 @@ let AddTodo = ({ authenticated, uid, dispatch }) => {
 }
 
 AddTodo.propTypes = {
-  authenticated: PropTypes.bool.isRequired,
-  uid: PropTypes.string
+  uid: PropTypes.string.isRequired
 }
 
-const mapStateToProps = state => ({
-  authenticated: !isEmpty(state.firebase.auth),
-  uid: state.firebase.auth.uid
-})
-
-AddTodo = connect(mapStateToProps)(AddTodo)
+AddTodo = connect()(AddTodo)
 
 export default AddTodo;
