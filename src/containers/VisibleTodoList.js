@@ -1,7 +1,7 @@
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { toggleTodo } from '../actions/todoActions'
 import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase'
+import { toggleTodo } from '../actions/todoActions'
 import TodoList from '../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
@@ -36,10 +36,8 @@ const getVisibleTodos = (todos, filter) => {
 
 const firebaseQuery = props => {
   if (props.uid) {
-    return [
-    `todos/${props.uid}`
-  ]}
-
+    return [`todos/${props.uid}`]
+  }
   return [];
 }
 

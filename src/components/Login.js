@@ -15,8 +15,8 @@ const Login = ({ firebase, auth, loginWithGoogle, logout }) => {
     )
   }
   return (<button onClick={logout}>Logout</button>);
-
 }
+
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
   loginWithGoogle: PropTypes.func.isRequired,

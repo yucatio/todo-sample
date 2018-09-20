@@ -17,7 +17,6 @@ NoticeForTodo.propTypes = {
   notice: PropTypes.string
 }
 
-
 const mapStateToProps = state => {
   return {
     notice: state.todos.notice
