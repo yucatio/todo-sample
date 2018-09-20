@@ -35,7 +35,7 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = state => {
   return {
-    todos: getVisibleTodos(state.firebase.data.todos, state.visiblityFilter)
+    todos: getVisibleTodos(state.firebase.data.todos, state.visibilityFilter)
   }
 }
 
