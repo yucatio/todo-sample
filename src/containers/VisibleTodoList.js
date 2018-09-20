@@ -43,7 +43,7 @@ const firebaseQuery = props => {
 
 const mapStateToProps = ({visibilityFilter, firebase: {auth, data : {todos}}}, {uid}) => {
   return {
-    todos: getVisibleTodos( todos && uid ? todos[uid] : undefined, visibilityFilter),
+    todos: getVisibleTodos(todos && uid ? todos[uid] : undefined, visibilityFilter),
     authenticating:  !isLoaded(auth),
     authenticated: !isEmpty(auth)
   }
