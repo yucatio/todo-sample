@@ -14,7 +14,12 @@ const Login = ({ firebase, auth, loginWithGoogle, logout }) => {
       <button onClick={loginWithGoogle}>Googleアカウントでログイン</button>
     )
   }
-  return (<button onClick={logout}>Logout</button>);
+  return (
+    <div>
+      {auth.displayName} さん
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
 }
 
 Login.propTypes = {
