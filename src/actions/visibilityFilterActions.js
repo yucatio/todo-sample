@@ -1,5 +1,7 @@
+import { SET_VISIBILITY_FILTER } from './'
+
 export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
+  type: SET_VISIBILITY_FILTER,
   filter
 })
 

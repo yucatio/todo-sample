@@ -35,6 +35,12 @@ AddTodo.propTypes = {
   uid: PropTypes.string.isRequired
 }
 
-AddTodo = connect()(AddTodo)
+const mapStateToProps = ({firebase: {auth: {uid}}}) => ({
+  uid,
+})
+
+AddTodo = connect(
+  mapStateToProps
+)(AddTodo)
 
 export default AddTodo;

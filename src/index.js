@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 import firebase from 'firebase'
-import './index.css';
 import todoApp from './reducers'
 import App from './components/App';
 import firebaseConfig from './firebase/config'

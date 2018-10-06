@@ -3,12 +3,12 @@ import { isEmpty, isLoaded } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
 import Todo from './Todo'
 
-const TodoList = ({uid, todos, onTodoClick}) => {
+const TodoList = ({todos, onTodoClick}) => {
   if (!isLoaded(todos)) {
-    return <div>読み込み中...</div>
+    return <div>タスク一覧を読み込み中…</div>
   }
   if (isEmpty(todos)) {
-    return <div>タスクリストが空です。</div>
+    return <div>タスクがありません。</div>
   }
   return (
     <ul>
@@ -16,7 +16,7 @@ const TodoList = ({uid, todos, onTodoClick}) => {
         (key) => (
           <Todo
             key={key} {...todos[key]}
-            onClick={() => onTodoClick(uid, key)} />
+            onClick={() => onTodoClick(key)} />
         )
       )}
     </ul>
@@ -24,8 +24,12 @@ const TodoList = ({uid, todos, onTodoClick}) => {
 }
 
 TodoList.propTypes = {
-  uid: PropTypes.string.isRequired,
-  todos: PropTypes.object,
+  todos: PropTypes.objectOf(
+    PropTypes.shape({
+      completed: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired
+    })
+  ),
   onTodoClick: PropTypes.func.isRequired
 }
 
