@@ -12,11 +12,11 @@ let TodoComponent = ({uid, authenticating, authenticated}) => {
     return <div>ログイン中...</div>
   }
   if (!authenticated) {
-    return <div>タスクリストを表示するには、ログインしてください。</div>
+    return <div>タスク一覧を表示するには、ログインしてください。</div>
   }
   return (
     <div>
-      <AddTodo uid={uid} />
+      <AddTodo />
       <NoticeForTodo />
       <VisibleTodoList uid={uid} />
       <Footer />
@@ -30,9 +30,9 @@ TodoComponent.propTypes = {
   authenticated: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = ({firebase: {auth, auth: {uid}, data : {todos}}}) => ({
+const mapStateToProps = ({firebase: {auth, auth: {uid}}}) => ({
   uid,
-  authenticating:  !isLoaded(auth),
+  authenticating: !isLoaded(auth),
   authenticated: !isEmpty(auth)
 })
 

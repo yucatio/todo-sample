@@ -1,11 +1,10 @@
 import React from 'react'
-import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 import { loginWithGoogle, logout } from '../actions/authActions'
 
-const Login = ({ firebase, auth, loginWithGoogle, logout }) => {
+const Login = ({ auth, loginWithGoogle, logout }) => {
   if (!isLoaded(auth)) {
     return (<div>ログイン中...</div>);
   }
@@ -40,9 +39,9 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const LoginComntainer = compose(
-  firebaseConnect(),
-  connect(mapStateToProps, mapDispatchToProps)
+const LoginComntainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(Login)
 
 export default LoginComntainer;

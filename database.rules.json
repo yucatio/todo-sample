@@ -3,7 +3,17 @@
     "todos" : {
       "$uid": {
         ".read": "$uid === auth.uid",
-        ".write": "$uid === auth.uid"
+        ".write": "$uid === auth.uid",
+        "$todoId": {
+          ".validate": "newData.hasChildren(['text', 'completed'])",
+          "text": {
+            ".validate": "newData.isString()"
+          },
+          "completed": {
+            ".validate": "newData.isBoolean()"
+          },
+          "$other": { ".validate": false }
+        }
       }
     },
     "users": {
@@ -11,6 +21,7 @@
         ".read": true,
         ".write": "$uid === auth.uid"
       }
-    }
+    },
+    "$other": { ".validate": false }
   }
 }

@@ -1,16 +1,57 @@
+import {ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
+  TOGGLE_TODO_REQUEST, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_ERROR,
+  NOT_AUTHENTICATED_ON_TODO_ACTION}
+   from './'
+
+const addTodoRequest = () => ({
+  type: ADD_TODO_REQUEST
+})
+
+const addTodoSuccess = () => ({
+  type: ADD_TODO_SUCCESS
+})
+
+const addTodoError = err => ({
+  type: ADD_TODO_ERROR,
+  err
+})
+
+const toggleTodoRequest = (text, completed) => ({
+  type: TOGGLE_TODO_REQUEST,
+  text,
+  completed
+})
+
+const toggleTodoSuccess = (text, completed) => ({
+  type: TOGGLE_TODO_SUCCESS,
+  text,
+  completed
+})
+
+const toggleTodoError = (text, completed, err) => ({
+  type: TOGGLE_TODO_ERROR,
+  text,
+  completed,
+  err
+})
+
+const notAuthenticatedOnTodoAction = () => ({
+  type: NOT_AUTHENTICATED_ON_TODO_ACTION
+})
+
 export const addTodo = (uid, text) => {
   return (dispatch, getState, {getFirebase}) => {
     if (!uid) {
-      dispatch({ type: 'NOT_AUTHENTICATED_ON_TODO_ACTION' });
+      dispatch(notAuthenticatedOnTodoAction());
       return;
     }
-    dispatch({ type: 'ADDING_TODO' });
+    dispatch(addTodoRequest());
     const firebase = getFirebase();
     firebase.push(`todos/${uid}`, {completed: false, text})
     .then(() => {
-      dispatch({ type: 'CREATE_TODO_SUCCESS' });
+      dispatch(addTodoSuccess());
     }).catch(err => {
-      dispatch({ type: 'CREATE_TODO_ERROR' }, err);
+      dispatch(addTodoError(err));
     });
   }
 }
@@ -18,18 +59,18 @@ export const addTodo = (uid, text) => {
 export const toggleTodo = (uid, id) => {
   return (dispatch, getState, {getFirebase}) => {
     if (!uid) {
-      dispatch({ type: 'NOT_AUTHENTICATED_ON_TODO_ACTION' });
+      dispatch(notAuthenticatedOnTodoAction());
       return;
     }
     const firebase = getFirebase();
     const state = getState();
-    const todos = state.firebase.data.todos[uid];
-    dispatch({ type: 'TOGGLING_TODO', text: todos[id].text, completed: !todos[id].completed });
-    firebase.update(`todos/${uid}/${id}`, {completed: ! todos[id].completed})
+    const todo = state.firebase.data.todos[uid][id];
+    dispatch(toggleTodoRequest(todo.text, !todo.completed));
+    firebase.update(`todos/${uid}/${id}`, {completed: ! todo.completed})
     .then(() => {
-      dispatch({ type: 'TOGGLE_TODO_SUCCESS', text: todos[id].text, completed: !todos[id].completed });
+      dispatch(toggleTodoSuccess(todo.text, !todo.completed));
     }).catch(err => {
-      dispatch({ type: 'TOGGLE_TODO_ERROR', text: todos[id].text, completed: !todos[id].completed }, err);
+      dispatch(toggleTodoError(todo.text, !todo.completed, err));
     });
   }
 }
