@@ -33,12 +33,17 @@ const getVisibleTodos = (todos, filter) => {
 }
 
 const firebaseQueries = ({uid}) => (
-  [`todos/${uid}`]
+  [
+    {path: `users/${uid}/displayName`, type: 'once'},
+    `todos/${uid}`
+  ]
 )
 
-const mapStateToProps = ({visibilityFilter, firebase: {auth, data : {todos}}}, {uid}) => {
+const mapStateToProps = ({visibilityFilter, firebase: {auth, data : {todos, users}}}, {uid}) => {
   return {
-    todos: getVisibleTodos(todos && todos[uid], visibilityFilter)
+    displayName: users && users[uid].displayName,
+    todos: getVisibleTodos(todos && todos[uid], visibilityFilter),
+    isOwnTodos: auth.uid === uid
   }
 }
 

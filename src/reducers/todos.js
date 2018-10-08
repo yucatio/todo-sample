@@ -1,3 +1,4 @@
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { LOGOUT_SUCCESS, ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
   TOGGLE_TODO_REQUEST, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_ERROR,
   NOT_AUTHENTICATED_ON_TODO_ACTION }
@@ -29,6 +30,7 @@ const todos = (state = {}, action) => {
         '"' + action.text + '"の更新中にエラーが発生しました。'}
     case NOT_AUTHENTICATED_ON_TODO_ACTION :
       return {...state, notice: 'タスクを追加・変更するにはログインしてください'}
+    case LOCATION_CHANGE:
     case LOGOUT_SUCCESS :
       return {}
     default:
