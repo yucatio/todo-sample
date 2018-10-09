@@ -5,28 +5,13 @@ admin.initializeApp();
 
 const MAX_RECENT_UPDATED_TODOS = 10;
 
-exports.addCreatedAt = functions.database.ref('/todos/{uid}/{todoId}/text')
-  .onCreate((snapshot, context) => {
-    const current = admin.database.ServerValue.TIMESTAMP;
-    return snapshot.ref.parent.update({_createdAt:current, _updatedAt: current});
-  });
-
-exports.updateUpdatedAt = functions.database.ref('/todos/{uid}/{todoId}/{field}')
-  .onUpdate((change, context) => {
-    const field = context.params.field;
-    if (field === '_updatedAt') {
-      return null;
-    }
-    return change.after.ref.parent.child('_updatedAt').set(admin.database.ServerValue.TIMESTAMP);
-  });
-
-const addRecentUpdate = (uid, todoId, todo, eventType) => {
+const addRecentUpdate = (uid, todoId, text, eventType) => {
   return admin.database().ref('/users/' + uid + '/displayName').once('value').then((snapshot) => {
     const displayName = snapshot.val();
     return (admin.database().ref('/recentUpdatedTodos/' + todoId).set({
       uid,
       displayName,
-      text: todo.text,
+      text,
       eventType,
       _updatedAt: admin.database.ServerValue.TIMESTAMP
     }))});
@@ -34,10 +19,10 @@ const addRecentUpdate = (uid, todoId, todo, eventType) => {
 
 exports.addRecentUpdateOnCreate = functions.database.ref('/todos/{uid}/{todoId}/text')
   .onCreate((snapshot, context) => {
-    const todo =  snapshot.val();
+    const text =  snapshot.val();
     const todoId = context.params.todoId;
     const uid = context.params.uid;
-    return addRecentUpdate(uid, todoId, todo, 'CREATE');
+    return addRecentUpdate(uid, todoId, text, 'CREATE');
   })
 
 exports.addRecentUpdateOnUpdate = functions.database.ref('/todos/{uid}/{todoId}')
@@ -45,7 +30,7 @@ exports.addRecentUpdateOnUpdate = functions.database.ref('/todos/{uid}/{todoId}'
     const todo =  change.after.val();
     const todoId = context.params.todoId;
     const uid = context.params.uid;
-    return addRecentUpdate(uid, todoId, todo, 'UPDATE');
+    return addRecentUpdate(uid, todoId, todo.text, 'UPDATE');
   })
 
 exports.limitRecentUpdatedTodos = functions.database.ref('/recentUpdatedTodos/{todoId}')
