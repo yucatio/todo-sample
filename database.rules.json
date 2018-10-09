@@ -22,6 +22,10 @@
         ".write": "$uid === auth.uid"
       }
     },
+    "recentUpdatedTodos": {
+      ".read": true,
+      ".write": false
+    },
     "$other": { ".validate": false }
   }
 }
