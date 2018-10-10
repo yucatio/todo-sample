@@ -41,7 +41,7 @@ const firebaseQueries = ({uid}) => (
 
 const mapStateToProps = ({visibilityFilter, firebase: {auth, data : {todos, users}}}, {uid}) => {
   return {
-    displayName: users && users[uid].displayName,
+    displayName: users && users[uid] && users[uid].displayName,
     todos: getVisibleTodos(todos && todos[uid], visibilityFilter),
     isOwnTodos: auth.uid === uid
   }

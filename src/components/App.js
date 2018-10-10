@@ -10,8 +10,8 @@ import NoMatch from './NoMatch'
 const App = ({ history }) => (
   <ConnectedRouter history={history}>
     <div>
-      <Navbar />
       <Login />
+      <Navbar />
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/users/:uid/todos" component={TodoComponent} />

@@ -19,7 +19,7 @@ const createStoreWithFirebase = compose(
   applyMiddleware(
     thunk.withExtraArgument({getFirebase}),
     routerMiddleware(history)),
-  reactReduxFirebase(firebase, {userProfile: 'users', preserveOnLogout: ['todos', 'users']})
+  reactReduxFirebase(firebase, {userProfile: 'users', preserveOnLogout: ['todos', 'users', 'recentUpdatedTodos']})
 )(createStore);
 
 const store = createStoreWithFirebase(connectRouter(history)(todoApp));
