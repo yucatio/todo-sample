@@ -1,6 +1,6 @@
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { firebaseConnect } from 'react-redux-firebase'
+import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase'
 import { toggleTodo } from '../../actions/todoActions'
 import TodoList from '../../components/todos/TodoList'
 
@@ -40,10 +40,12 @@ const firebaseQueries = ({uid}) => (
 )
 
 const mapStateToProps = ({visibilityFilter, firebase: {auth, data : {todos, users}}}, {uid}) => {
+  const displayName =　users && users[uid] &&　users[uid].displayName
   return {
-    displayName: users && users[uid] && users[uid].displayName,
+    noUser: isLoaded(displayName) && isEmpty(displayName),
+    displayName,
     todos: getVisibleTodos(todos && todos[uid], visibilityFilter),
-    isOwnTodos: auth.uid === uid
+    isOwnTodos: auth.uid === uid,
   }
 }
 

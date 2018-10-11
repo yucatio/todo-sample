@@ -3,7 +3,10 @@ import { isEmpty, isLoaded } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
 import Todo from './Todo'
 
-const TodoList = ({displayName, todos, isOwnTodos, onTodoClick}) => {
+const TodoList = ({noUser, displayName, todos, isOwnTodos, onTodoClick}) => {
+  if (noUser) {
+    return <div>存在しないユーザです。</div>
+  }
   if (!isLoaded(todos)) {
     return <div>タスク一覧を読み込み中…</div>
   }
@@ -31,6 +34,7 @@ const TodoList = ({displayName, todos, isOwnTodos, onTodoClick}) => {
 }
 
 TodoList.propTypes = {
+  noUser: PropTypes.bool.isRequired,
   displayName: PropTypes.string,
   todos: PropTypes.objectOf(
     PropTypes.shape({
