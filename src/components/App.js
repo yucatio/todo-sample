@@ -1,14 +1,13 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './navbar'
 import Dashboard from './dashboard/'
 import Login from './login/'
 import TodoComponent from './todos/'
 import NoMatch from './NoMatch'
 
-const App = ({ history }) => (
-  <ConnectedRouter history={history}>
+const App = () => (
+  <BrowserRouter>
     <div>
       <Login />
       <Navbar />
@@ -18,7 +17,7 @@ const App = ({ history }) => (
         <Route component={NoMatch} />
       </Switch>
     </div>
-  </ConnectedRouter>
+  </BrowserRouter>
 )
 
 export default App;

@@ -3,17 +3,32 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import AddTodo from '../../containers/todos/AddTodo'
 import VisibleTodoList from '../../containers/todos/VisibleTodoList'
+import { locationChange } from '../../actions/routeAction'
 import NoticeForTodo from './Notice'
 import Footer from './Footer'
 
-let TodoComponent = ({uid, isOwnTodos}) => (
-  <div>
-    {isOwnTodos && <AddTodo />}
-    <NoticeForTodo />
-    <VisibleTodoList uid={uid} />
-    <Footer />
-  </div>
-)
+class TodoComponent extends React.Component {
+  componentWillMount() {
+    this.props.locationChange()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.location !== this.props.location) {
+      this.props.locationChange()
+    }
+  }
+  render() {
+    const {uid, isOwnTodos} = this.props;
+    return (
+      <div>
+        {isOwnTodos && <AddTodo />}
+        <NoticeForTodo />
+        <VisibleTodoList uid={uid} />
+        <Footer />
+      </div>
+   )
+  }
+}
 
 
 TodoComponent.propTypes = {
@@ -26,8 +41,13 @@ const mapStateToProps = ({firebase: {auth: {uid}}}, {match}) => ({
   isOwnTodos: uid === match.params.uid,
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  locationChange: () => dispatch(locationChange())
+})
+
 TodoComponent = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(TodoComponent)
 
 export default TodoComponent;

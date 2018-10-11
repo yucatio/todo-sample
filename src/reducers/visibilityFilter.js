@@ -1,5 +1,4 @@
-import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOGOUT_SUCCESS, SET_VISIBILITY_FILTER } from '../actions/'
+import { LOCATION_CHANGE, LOGOUT_SUCCESS, SET_VISIBILITY_FILTER } from '../actions/'
 import { VisibilityFilters } from '../actions/visibilityFilterActions'
 
 const visibilityFilter = (state = VisibilityFilters.SHOW_ALL, action) => {

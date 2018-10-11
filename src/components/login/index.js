@@ -34,8 +34,7 @@ const mapStateToProps = state => (
 const mapDispatchToProps = dispatch => {
   return {
     loginWithGoogle: () => dispatch(loginWithGoogle()),
-    logout: () => {dispatch(logout())
-    }
+    logout: () => dispatch(logout())
   }
 }
 
