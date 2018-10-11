@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import AddTodo from '../containers/AddTodo'
-import NoticeForTodo from './NoticeForTodo'
-import VisibleTodoList from '../containers/VisibleTodoList'
+import AddTodo from '../../containers/todos/AddTodo'
+import VisibleTodoList from '../../containers/todos/VisibleTodoList'
+import NoticeForTodo from './Notice'
 import Footer from './Footer'
 
 let TodoComponent = ({uid, isOwnTodos}) => (

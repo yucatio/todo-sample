@@ -1,5 +1,5 @@
 import React from 'react'
-import RecentUpdatedTodos from './RecentUpdatedTodos'
+import RecentUpdatedTodos from './recentUpdatedTodos/'
 
 const Dashboard = () => (
   <div>

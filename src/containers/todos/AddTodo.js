@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { addTodo } from '../actions/todoActions'
+import { addTodo } from '../../actions/todoActions'
 
 let AddTodo = ({authUid, dispatch }) => {
   let input;
