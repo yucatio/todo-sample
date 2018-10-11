@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import UserUpdatedTodos from './UserUpdatedTodo'
 
 let RecentUpdatedTodos = ({todos}) => {
-  const header = (<h1>最近更新されたタスク</h1>)
+  const header = (<h1>最近の更新</h1>)
   if (!isLoaded(todos)) {
     return (
       <div>
