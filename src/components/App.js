@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Navbar from './navbar'
+import Navbar from './navbar/'
 import Dashboard from './dashboard/'
 import Login from './login/'
 import TodoComponent from './todos/'
