@@ -1,6 +1,3 @@
-// routing
-export const LOCATION_CHANGE = 'LOCATION_CHANGE'
-
 // auth actions
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
@@ -8,6 +5,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_ERROR = 'LOGOUT_ERROR'
 
 // todo actions
+export const LOCATION_CHANGE_ON_TODOS = 'LOCATION_CHANGE_ON_TODOS'
 export const ADD_TODO_REQUEST = 'ADD_TODO_REQUEST';
 export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
 export const ADD_TODO_ERROR   = 'ADD_TODO_ERROR';

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 const UserUpdatedTodos = ({text, eventType, uid, displayName, _updatedAt}) => (
   <li>
-    <Link to={`/users/${uid}/todos`}>{displayName}</Link>さんが {text} を{ eventType === 'CREATE' ? '作成' : '更新'}
+    <Link to={`/users/${uid}/todos`}>{displayName}</Link>さんが {text} を{eventType === 'CREATE' ? '作成' : '更新'}
     しました。 ({ moment(_updatedAt).fromNow()})
   </li>
 )

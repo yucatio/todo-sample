@@ -43,7 +43,6 @@ const mapStateToProps = ({visibilityFilter, firebase: {auth, data : {todos, user
   return {
     displayName: users && users[uid] &&　users[uid].displayName,
     todos: getVisibleTodos(todos && todos[uid], visibilityFilter),
-    isOwnTodos: auth.uid === uid,
   }
 }
 

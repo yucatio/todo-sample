@@ -28,7 +28,7 @@ let RecentUpdatedTodos = ({todos}) => {
     <div>
       {header}
       <ul>
-        {todos.reverse().map(({key, value:todo}) =>
+        {todos.map(({key, value:todo}) =>
           <UserUpdatedTodos  key={key} {...todo}/>
         )}
       </ul>
@@ -59,7 +59,7 @@ const firebaseQueries = ({uid}) => (
 
 const mapStateToProps = ({firebase: {ordered : {recentUpdatedTodos}}}) => {
   return {
-    todos: recentUpdatedTodos
+    todos: recentUpdatedTodos && recentUpdatedTodos.reverse()
   }
 }
 

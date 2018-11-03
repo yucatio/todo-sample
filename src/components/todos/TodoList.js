@@ -23,9 +23,8 @@ const TodoList = ({displayName, todos, isOwnTodos, onTodoClick}) => {
           (key) => (
             <Todo
               key={key}
-              isOwnTodos={isOwnTodos}
               {...todos[key]}
-              onClick={() => onTodoClick(key)} />
+              onClick={isOwnTodos ? (() => onTodoClick(key)) : (() => {})} />
           )
         )}
       </ul>

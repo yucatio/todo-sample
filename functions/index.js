@@ -5,51 +5,58 @@ admin.initializeApp();
 
 const MAX_RECENT_UPDATED_TODOS = 10;
 
-const addRecentUpdate = (uid, todoId, text, eventType) => {
+const addRecentUpdate = (uid, todoId, todo, eventType) => {
   return admin.database().ref('/users/' + uid + '/displayName').once('value').then((snapshot) => {
     const displayName = snapshot.val();
     return (admin.database().ref('/recentUpdatedTodos/' + todoId).set({
       uid,
       displayName,
-      text,
+      text: todo.text,
       eventType,
-      _updatedAt: admin.database.ServerValue.TIMESTAMP
-    }))});
-  }
+      _updatedAt: todo._updatedAt
+    }));
+  });
+}
 
-exports.addRecentUpdateOnCreate = functions.database.ref('/todos/{uid}/{todoId}/text')
+exports.addRecentUpdateOnCreate = functions.database.ref('/todos/{uid}/{todoId}/_createdAt')
   .onCreate((snapshot, context) => {
-    const text =  snapshot.val();
-    const todoId = context.params.todoId;
     const uid = context.params.uid;
-    return addRecentUpdate(uid, todoId, text, 'CREATE');
-  })
+    const todoId = context.params.todoId;
 
-exports.addRecentUpdateOnUpdate = functions.database.ref('/todos/{uid}/{todoId}')
+    return snapshot.ref.parent.once('value').then((snapshot) => {
+      const todo = snapshot.val();
+      return addRecentUpdate(uid, todoId, todo, 'CREATE');
+    });
+})
+
+exports.addRecentUpdateOnUpdate = functions.database.ref('/todos/{uid}/{todoId}/_updatedAt')
   .onUpdate((change, context) => {
-    const todo =  change.after.val();
     const todoId = context.params.todoId;
     const uid = context.params.uid;
-    return addRecentUpdate(uid, todoId, todo.text, 'UPDATE');
-  })
 
-exports.limitRecentUpdatedTodos = functions.database.ref('/recentUpdatedTodos/{todoId}')
+    return change.after.ref.parent.once('value').then((snapshot) => {
+      const todo = snapshot.val();
+      return addRecentUpdate(uid, todoId, todo, 'UPDATE');
+    });
+})
+
+exports.limitRecentUpdatedTodos = functions.database.ref('/recentUpdatedTodos/{todoId}/_updatedAt')
   .onCreate((snapshot, context) => {
-    const parentRef = snapshot.ref.parent;
-    return parentRef.orderByChild('_updatedAt').once('value').then((todosSnapshot) => {
+    const recentUpdatedTodosRef = snapshot.ref.parent.parent;
+    return recentUpdatedTodosRef.orderByChild('_updatedAt').once('value').then((todosSnapshot) => {
 
-      if (todosSnapshot.numChildren() > MAX_RECENT_UPDATED_TODOS) {
-        let childCount = 0;
-        const updates = {};
-        todosSnapshot.forEach((child) => {
-          // remove old updates
-          if (++childCount <= todosSnapshot.numChildren() - MAX_RECENT_UPDATED_TODOS) {
-            updates[child.key] = null;
-          }
-        });
-        return parentRef.update(updates);
+      if (todosSnapshot.numChildren() <= MAX_RECENT_UPDATED_TODOS) {
+        return null;
       }
 
-      return null;
+      let childCount = 0;
+      const updates = {};
+      todosSnapshot.forEach((child) => {
+        // remove old updates
+        if (++childCount <= todosSnapshot.numChildren() - MAX_RECENT_UPDATED_TODOS) {
+          updates[child.key] = null;
+        }
+      });
+      return recentUpdatedTodosRef.update(updates);
     });
-  })
+})

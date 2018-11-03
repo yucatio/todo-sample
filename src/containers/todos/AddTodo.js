@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addTodo } from '../../actions/todoActions'
 
-let AddTodo = ({authUid, dispatch }) => {
+let AddTodo = ({uid, dispatch }) => {
   let input;
 
   return (
@@ -14,7 +14,7 @@ let AddTodo = ({authUid, dispatch }) => {
           if (!input.value.trim()) {
             return
           }
-          dispatch(addTodo(authUid, input.value))
+          dispatch(addTodo(uid, input.value))
           input.value = ''
         }}
       >
@@ -32,15 +32,9 @@ let AddTodo = ({authUid, dispatch }) => {
 }
 
 AddTodo.propTypes = {
-  authUid: PropTypes.string.isRequired
+  uid: PropTypes.string.isRequired
 }
 
-const mapStateToProps = ({firebase: {auth: {uid}}}) => ({
-  authUid: uid
-})
-
-AddTodo = connect(
-  mapStateToProps
-)(AddTodo)
+AddTodo = connect()(AddTodo)
 
 export default AddTodo;
