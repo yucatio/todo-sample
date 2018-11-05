@@ -1,4 +1,5 @@
-import { LOGOUT_SUCCESS, ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
+import { LOCATION_CHANGE_ON_TODOS, LOGOUT_SUCCESS,
+  ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
   TOGGLE_TODO_REQUEST, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_ERROR,
   NOT_AUTHENTICATED_ON_TODO_ACTION }
    from '../actions/'
@@ -29,6 +30,7 @@ const todos = (state = {}, action) => {
         '"' + action.text + '"の更新中にエラーが発生しました。'}
     case NOT_AUTHENTICATED_ON_TODO_ACTION :
       return {...state, notice: 'タスクを追加・変更するにはログインしてください'}
+    case LOCATION_CHANGE_ON_TODOS:
     case LOGOUT_SUCCESS :
       return {}
     default:

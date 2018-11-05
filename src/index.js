@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 
 const createStoreWithFirebase = compose(
   applyMiddleware(thunk.withExtraArgument({getFirebase})),
-  reactReduxFirebase(firebase, {userProfile: 'users'})
+  reactReduxFirebase(firebase, {userProfile: 'users', preserveOnLogout: ['todos', 'users', 'recentUpdatedTodos']})
 )(createStore);
 
 const store = createStoreWithFirebase(todoApp);

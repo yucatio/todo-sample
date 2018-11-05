@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { isLoaded, isEmpty } from 'react-redux-firebase'
-import { loginWithGoogle, logout } from '../actions/authActions'
+import { loginWithGoogle, logout } from '../../actions/authActions'
 
 const Login = ({ auth, loginWithGoogle, logout }) => {
   if (!isLoaded(auth)) {
@@ -34,8 +34,7 @@ const mapStateToProps = state => (
 const mapDispatchToProps = dispatch => {
   return {
     loginWithGoogle: () => dispatch(loginWithGoogle()),
-    logout: () => {dispatch(logout())
-    }
+    logout: () => dispatch(logout())
   }
 }
 
