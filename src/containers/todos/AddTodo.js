@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import { addTodo } from '../../actions/todoActions'
 
 let AddTodo = ({uid, dispatch }) => {
@@ -18,14 +20,14 @@ let AddTodo = ({uid, dispatch }) => {
           input.value = ''
         }}
       >
-        <input
-          ref={node => {
+        <TextField
+          inputRef={node => {
             input = node
           }}
         />
-        <button type="submit">
-          Add Todo
-        </button>
+        <Button variant="contained" type="submit">
+          タスクを追加
+        </Button>
       </form>
     </div>
   )

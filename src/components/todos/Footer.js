@@ -1,20 +1,21 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography';
 import FilterLink from '../../containers/todos/FilterLink'
 import { VisibilityFilters } from '../../actions/visibilityFilterActions'
 
 const Footer = () => (
-  <p>
-    Show:
+  <div>
+    <Typography variant="subtitle1">表示:</Typography>
     <FilterLink filter={VisibilityFilters.SHOW_ALL}>
-      All
+      全て
     </FilterLink>
     <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>
-      Active
+      未完了
     </FilterLink>
     <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>
-      Completed
+      完了
     </FilterLink>
-  </p>
+  </div>
 )
 
 export default Footer;

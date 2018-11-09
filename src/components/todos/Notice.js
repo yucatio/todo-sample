@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Typography from '@material-ui/core/Typography';
 
 let NoticeForTodo = ({ notice }) => {
   if (! notice) {
     return '';
   }
   return (
-    <div>
+    <Typography>
       {notice}
-    </div>
+    </Typography>
   )
 }
 
