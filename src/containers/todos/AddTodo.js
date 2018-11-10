@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { addTodo } from '../../actions/todoActions'
 
-let AddTodo = ({uid, dispatch }) => {
+const AddTodo = ({uid, dispatch }) => {
   let input;
 
   return (
@@ -37,6 +37,4 @@ AddTodo.propTypes = {
   uid: PropTypes.string.isRequired
 }
 
-AddTodo = connect()(AddTodo)
-
-export default AddTodo;
+export default connect()(AddTodo)

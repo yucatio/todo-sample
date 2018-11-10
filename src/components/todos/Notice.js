@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography';
 
-let NoticeForTodo = ({ notice }) => {
+const Notice = ({ notice }) => {
   if (! notice) {
     return '';
   }
@@ -14,7 +14,7 @@ let NoticeForTodo = ({ notice }) => {
   )
 }
 
-NoticeForTodo.propTypes = {
+Notice.propTypes = {
   notice: PropTypes.string
 }
 
@@ -24,8 +24,6 @@ const mapStateToProps = state => {
   }
 }
 
-NoticeForTodo = connect(
+export default connect(
   mapStateToProps
-)(NoticeForTodo)
-
-export default NoticeForTodo;
+)(Notice)

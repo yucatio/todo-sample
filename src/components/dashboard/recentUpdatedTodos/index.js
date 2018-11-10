@@ -3,40 +3,38 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 import UserUpdatedTodos from './UserUpdatedTodo'
 
-let RecentUpdatedTodos = ({todos}) => {
-  const header = (<Typography variant="h5">最近の更新</Typography>)
+const styles = theme => ({
+  toolbar: theme.mixins.toolbar,
+});
+
+const RecentUpdatedList = (todos) => {
   if (!isLoaded(todos)) {
-    return (
-      <div>
-        {header}
-        <Typography>読み込み中…</Typography>
-      </div>
-    )
+    return <Typography>読み込み中…</Typography>
   }
   if (isEmpty(todos)) {
-    return (
-      <div>
-        {header}
-        <Typography>データがありません。</Typography>
-      </div>
-    )
+    return <Typography>データがありません。</Typography>
   }
-
   return (
-    <div>
-      {header}
-      <List>
-        {todos.map(({key, value:todo}) =>
-          <UserUpdatedTodos key={key} {...todo}/>
-        )}
-      </List>
-    </div>
+    <List>
+      {todos.map(({key, value:todo}) =>
+        <UserUpdatedTodos key={key} {...todo}/>
+      )}
+    </List>
   )
 }
+
+const RecentUpdatedTodos = ({todos, classes}) => (
+  <div>
+    <div className={classes.toolbar} />
+    <Typography variant="h5">最近の更新</Typography>
+    {RecentUpdatedList(todos)}
+  </div>
+)
 
 RecentUpdatedTodos.propTypes = {
   todos: PropTypes.arrayOf(
@@ -52,6 +50,7 @@ RecentUpdatedTodos.propTypes = {
       }).isRequired
     })
   ),
+  classes: PropTypes.object.isRequired
 }
 
 const firebaseQueries = ({uid}) => (
@@ -66,10 +65,9 @@ const mapStateToProps = ({firebase: {ordered : {recentUpdatedTodos}}}) => {
   }
 }
 
-RecentUpdatedTodos = compose(
+export default compose(
   firebaseConnect(firebaseQueries),
+  withStyles(styles),
   connect(
    mapStateToProps
 ))(RecentUpdatedTodos)
-
-export default RecentUpdatedTodos;

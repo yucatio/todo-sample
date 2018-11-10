@@ -54,11 +54,9 @@ const mapDispatchToProps = (dispatch, {uid}) => {
   }
 }
 
-const VisibleTodoList = compose(
+export default compose(
   firebaseConnect(firebaseQueries),
   connect(
    mapStateToProps,
    mapDispatchToProps
 ))(TodoList)
-
-export default VisibleTodoList;

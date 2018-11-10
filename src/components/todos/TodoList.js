@@ -1,8 +1,8 @@
 import React from 'react'
 import { isEmpty, isLoaded } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 import Todo from './Todo'
 
 const TodoList = ({displayName, todos, isOwnTodos, onTodoClick}) => {
@@ -16,22 +16,18 @@ const TodoList = ({displayName, todos, isOwnTodos, onTodoClick}) => {
     return <Typography>タスクがありません。</Typography>
   }
 
-  const name = isOwnTodos ? 'あなた' : `${displayName} さん`;
   return (
-    <div>
-      {displayName && <Typography variant="h5">{name}のタスク一覧</Typography>}
-      <List>
-        {Object.keys(todos).map(
-          (key) => (
-            <Todo
-              key={key}
-              isOwnTodos={isOwnTodos}
-              {...todos[key]}
-              onClick={isOwnTodos ? (() => onTodoClick(key)) : (() => {})} />
-          )
-        )}
-      </List>
-    </div>
+    <List>
+      {Object.keys(todos).map(
+        (key) => (
+          <Todo
+            key={key}
+            isOwnTodos={isOwnTodos}
+            {...todos[key]}
+            onClick={isOwnTodos ? (() => onTodoClick(key)) : (() => {})} />
+        )
+      )}
+    </List>
   )
 }
 

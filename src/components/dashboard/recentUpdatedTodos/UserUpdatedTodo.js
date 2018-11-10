@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/ja'
-import Avatar from '@material-ui/core/Avatar';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import PersonIcon from '@material-ui/icons/Person';
+import Avatar from '@material-ui/core/Avatar'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import ListItemText from '@material-ui/core/ListItemText'
+import PersonIcon from '@material-ui/icons/Person'
 import PropTypes from 'prop-types'
 
 const UserUpdatedTodos = ({text, eventType, uid, displayName, avatarUrl, _updatedAt}) => (

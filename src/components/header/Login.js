@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { isLoaded, isEmpty } from 'react-redux-firebase'
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import { loginWithGoogle, logout } from '../../actions/authActions'
 
-let Login = ({ auth, loginWithGoogle, logout }) => {
+const Login = ({ auth, loginWithGoogle, logout }) => {
   if (!isLoaded(auth)) {
     return (<Typography>ログイン中...</Typography>);
   }
@@ -16,7 +16,7 @@ let Login = ({ auth, loginWithGoogle, logout }) => {
     )
   }
   return (
-    <Typography>
+    <Typography color="inherit">
       {auth.displayName} さん
       <Button variant="contained" color="primary" onClick={logout}>ログアウト</Button>
     </Typography>
@@ -40,9 +40,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-Login = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login)
-
-export default Login;

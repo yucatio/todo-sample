@@ -2,15 +2,18 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton'
+import Tooltip from '@material-ui/core/Tooltip';
+import EditIcon from '@material-ui/icons/Edit'
 
-let MenuIcons = ({uid}) => {
+const MenuIcons = ({uid}) => {
   if (uid) {
     return (
-      <IconButton component={Link} to={`/users/${uid}/todos`} aria-label="編集">
-        <EditIcon />
-      </IconButton>
+      <Tooltip title="編集">
+        <IconButton color="inherit" component={Link} to={`/users/${uid}/todos`} aria-label="編集">
+          <EditIcon />
+        </IconButton>
+      </Tooltip>
     )
   } else {
     return null;
@@ -25,8 +28,6 @@ const mapStateToProps = state => (
   { uid: state.firebase.auth.uid }
 )
 
-MenuIcons = connect(
+export default connect(
   mapStateToProps
 )(MenuIcons)
-
-export default MenuIcons;

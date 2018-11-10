@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Done from '@material-ui/icons/Done';
+import ListItemText from '@material-ui/core/ListItemText'
+import Checkbox from '@material-ui/core/Checkbox'
+import Done from '@material-ui/icons/Done'
 
 const CheckIcon = (isOwnTodos, completed) => {
   if (isOwnTodos) {
