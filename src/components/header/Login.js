@@ -16,10 +16,10 @@ const Login = ({ auth, loginWithGoogle, logout }) => {
     )
   }
   return (
-    <Typography color="inherit">
-      {auth.displayName} さん
+    <React.Fragment>
+      <Typography color="inherit">{auth.displayName} さん</Typography>
       <Button variant="contained" color="primary" onClick={logout}>ログアウト</Button>
-    </Typography>
+    </React.Fragment>
   );
 }
 

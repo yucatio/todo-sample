@@ -4,23 +4,27 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Checkbox from '@material-ui/core/Checkbox'
-import Done from '@material-ui/icons/Done'
+import { Done, CropSquare } from '@material-ui/icons'
 
 const CheckIcon = (isOwnTodos, completed) => {
-  if (isOwnTodos) {
-    return (<Checkbox
-      checked={completed}
-    />)
-  } else {
-    return (completed &&
+  return (
+    completed ?
       <ListItemIcon>
         <Done />
-      </ListItemIcon>)
-  }
+      </ListItemIcon>
+      :
+      isOwnTodos ?
+        <ListItemIcon>
+          <CropSquare />
+        </ListItemIcon>
+        :
+        null
+  )
 }
 
 const Todo = ({isOwnTodos, onClick, completed, text}) => (
   <ListItem
+    button={isOwnTodos}
     onClick={onClick}
     >
     {CheckIcon(isOwnTodos, completed)}
