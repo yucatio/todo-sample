@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Checkbox from '@material-ui/core/Checkbox'
-import { Done, CropSquare } from '@material-ui/icons'
+import { Done, CheckBoxOutlineBlank } from '@material-ui/icons'
 
 const CheckIcon = (isOwnTodos, completed) => {
   return (
@@ -15,7 +15,7 @@ const CheckIcon = (isOwnTodos, completed) => {
       :
       isOwnTodos ?
         <ListItemIcon>
-          <CropSquare />
+          <CheckBoxOutlineBlank />
         </ListItemIcon>
         :
         null
