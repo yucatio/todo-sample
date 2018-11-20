@@ -1,5 +1,5 @@
 import moment from 'moment'
-import {LOCATION_CHANGE_ON_TODOS, ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
+import {LOCATION_CHANGE_ON_TODOS, CLOSE_NOTICE, ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
   TOGGLE_TODO_REQUEST, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_ERROR,
   NOT_AUTHENTICATED_ON_TODO_ACTION}
    from './'
@@ -8,35 +8,39 @@ export const locationChangeOnTodos = () => ({
   type: LOCATION_CHANGE_ON_TODOS
 })
 
-const addTodoRequest = () => ({
-  type: ADD_TODO_REQUEST
+export const closeNotice = () => ({
+  type: CLOSE_NOTICE
 })
 
-const addTodoSuccess = () => ({
-  type: ADD_TODO_SUCCESS
+const addTodoRequest = (todoId) => ({
+  type: ADD_TODO_REQUEST,
+  todoId
 })
 
-const addTodoError = err => ({
+const addTodoSuccess = (todoId) => ({
+  type: ADD_TODO_SUCCESS,
+  todoId
+})
+
+const addTodoError = (todoId, err) => ({
   type: ADD_TODO_ERROR,
+  todoId,
   err
 })
 
-const toggleTodoRequest = (text, completed) => ({
+const toggleTodoRequest = (todoId) => ({
   type: TOGGLE_TODO_REQUEST,
-  text,
-  completed
+  todoId
 })
 
-const toggleTodoSuccess = (text, completed) => ({
+const toggleTodoSuccess = (todoId) => ({
   type: TOGGLE_TODO_SUCCESS,
-  text,
-  completed
+  todoId
 })
 
-const toggleTodoError = (text, completed, err) => ({
+const toggleTodoError = (todoId, err) => ({
   type: TOGGLE_TODO_ERROR,
-  text,
-  completed,
+  todoId,
   err
 })
 
@@ -50,18 +54,21 @@ export const addTodo = (uid, text) => {
       dispatch(notAuthenticatedOnTodoAction());
       return;
     }
-    dispatch(addTodoRequest());
+
     const firebase = getFirebase();
     const createdAt = moment().valueOf();
-    firebase.push(`todos/${uid}`,{
-      completed: false,
-      text,
-      _createdAt : createdAt,
-      _updatedAt : createdAt
+    const id = firebase.push(`todos/${uid}`).key
+
+    dispatch(addTodoRequest(id));
+    firebase.set(`todos/${uid}/${id}`,{
+        completed: false,
+        text,
+        _createdAt : createdAt,
+        _updatedAt : createdAt
     }).then(() => {
-      dispatch(addTodoSuccess());
+      dispatch(addTodoSuccess(id));
     }).catch(err => {
-      dispatch(addTodoError(err));
+      dispatch(addTodoError(id, err));
     });
   }
 }
@@ -75,15 +82,15 @@ export const toggleTodo = (uid, id) => {
     const firebase = getFirebase();
     const state = getState();
     const todo = state.firebase.data.todos[uid][id];
-    dispatch(toggleTodoRequest(todo.text, !todo.completed));
+    dispatch(toggleTodoRequest(id));
     const updatedAt = moment().valueOf();
     firebase.update(`todos/${uid}/${id}`, {
       completed: ! todo.completed,
       _updatedAt : updatedAt
     }).then(() => {
-      dispatch(toggleTodoSuccess(todo.text, !todo.completed));
+      dispatch(toggleTodoSuccess(id));
     }).catch(err => {
-      dispatch(toggleTodoError(todo.text, !todo.completed, err));
+      dispatch(toggleTodoError(id, err));
     });
   }
 }

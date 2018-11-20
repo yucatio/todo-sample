@@ -3,14 +3,9 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import UserUpdatedTodos from './UserUpdatedTodo'
-
-const styles = theme => ({
-  toolbar: theme.mixins.toolbar,
-});
 
 const RecentUpdatedList = (todos) => {
   if (!isLoaded(todos)) {
@@ -28,9 +23,8 @@ const RecentUpdatedList = (todos) => {
   )
 }
 
-const RecentUpdatedTodos = ({todos, classes}) => (
+const RecentUpdatedTodos = ({todos}) => (
   <div>
-    <div className={classes.toolbar} />
     <Typography variant="h5">最近の更新</Typography>
     {RecentUpdatedList(todos)}
   </div>
@@ -49,8 +43,7 @@ RecentUpdatedTodos.propTypes = {
         _updatedAt: PropTypes.number.isRequired
       }).isRequired
     })
-  ),
-  classes: PropTypes.object.isRequired
+  )
 }
 
 const firebaseQueries = ({uid}) => (
@@ -67,7 +60,6 @@ const mapStateToProps = ({firebase: {ordered : {recentUpdatedTodos}}}) => {
 
 export default compose(
   firebaseConnect(firebaseQueries),
-  withStyles(styles),
   connect(
    mapStateToProps
 ))(RecentUpdatedTodos)

@@ -7,11 +7,16 @@ import AddTodo from '../../containers/todos/AddTodo'
 import { locationChangeOnTodos } from '../../actions/todoActions'
 import VisibleTodoList from '../../containers/todos/VisibleTodoList'
 import Title from './Title'
-import Notice from './Notice'
 import FilterNav from './FilterNav'
 
 const styles = theme => ({
-  toolbar: theme.mixins.toolbar,
+  todoRoot: {
+    display: 'flex',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+  },
 });
 
 class TodoComponent extends React.Component {
@@ -27,12 +32,12 @@ class TodoComponent extends React.Component {
   render() {
     const {isOwnTodos, match: { params: {uid}}, classes} = this.props;
     return (
-      <div>
-        <div className={classes.toolbar} />
-        <Title isOwnTodos={isOwnTodos} uid={uid} />
-        {isOwnTodos && <AddTodo uid={uid} />}
-        <Notice />
-        <VisibleTodoList uid={uid} isOwnTodos={isOwnTodos} />
+      <div className={classes.todoRoot}>
+        <main className={classes.content}>
+          <Title isOwnTodos={isOwnTodos} uid={uid} />
+          {isOwnTodos && <AddTodo uid={uid} />}
+          <VisibleTodoList uid={uid} isOwnTodos={isOwnTodos} />
+        </main>
         <FilterNav />
       </div>
    )
