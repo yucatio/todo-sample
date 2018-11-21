@@ -10,11 +10,6 @@ import Paper from '@material-ui/core/Paper'
 import UserUpdatedTodos from './UserUpdatedTodo'
 
 const styles = theme => ({
-  recentUpdate: {
-    maxWidth: 800,
-    marginLeft  : 'auto',
-    marginRight : 'auto'
-  },
   title: {
     paddingTop: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,
@@ -42,7 +37,7 @@ const RecentUpdatedList = (todos, classes) => {
 }
 
 const RecentUpdatedTodos = ({todos, classes}) => (
-  <Paper className={classes.recentUpdate}>
+  <Paper>
     <Typography variant="h5" className={classes.title}>最近の更新</Typography>
     {RecentUpdatedList(todos, classes)}
   </Paper>

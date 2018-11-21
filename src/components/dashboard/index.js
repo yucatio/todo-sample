@@ -3,15 +3,20 @@ import { withStyles } from '@material-ui/core/styles'
 import RecentUpdatedTodos from './recentUpdatedTodos/'
 
 const styles = theme => ({
-  dashboard: {
+  dashboradContent: {
+    maxWidth: 800,
     marginTop: theme.spacing.unit * 5,
-    marginBottom: theme.spacing.unit * 5
+    marginBottom: theme.spacing.unit * 5,
+    marginLeft  : 'auto',
+    marginRight : 'auto'
   },
 })
 
 const Dashboard = ({classes}) => (
-  <div className={classes.dashboard}>
-    <RecentUpdatedTodos />
+  <div>
+    <div className={classes.dashboradContent}>
+      <RecentUpdatedTodos />
+    </div>
   </div>
 )
 
