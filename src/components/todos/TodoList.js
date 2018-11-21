@@ -6,10 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 import Todo from './Todo'
 
-const TodoList = ({displayName, todos, isOwnTodos, todoStatuses, onTodoClick}) => {
-  if (isLoaded(displayName) && isEmpty(displayName)) {
-    return <Typography>存在しないユーザです。</Typography>
-  }
+const TodoList = ({todos, isOwnTodos, todoStatuses, onTodoClick}) => {
   if (!isLoaded(todos)) {
     return <CircularProgress />
   }
@@ -35,7 +32,6 @@ const TodoList = ({displayName, todos, isOwnTodos, todoStatuses, onTodoClick}) =
 }
 
 TodoList.propTypes = {
-  displayName: PropTypes.string,
   todos: PropTypes.objectOf(
     PropTypes.shape({
       completed: PropTypes.bool.isRequired,
