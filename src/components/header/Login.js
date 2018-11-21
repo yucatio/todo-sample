@@ -7,30 +7,61 @@ import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import { loginWithGoogle, logout } from '../../actions/authActions'
 
 const styles = {
   avatar: {
     margin: 10,
   },
+  userName: {
+    textTransform: 'none',
+  }
 }
 
-const Login = ({ auth, profile, loginWithGoogle, logout, classes }) => {
-  if (!isLoaded(auth)) {
-    return (<Typography>ログイン中...</Typography>);
+class Login extends React.Component {
+  state = {
+    anchorEl: null,
   }
-  if (isEmpty(auth)) {
+
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  }
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  }
+
+  render() {
+    const { auth, profile, loginWithGoogle, logout, classes } = this.props
+    const { anchorEl } = this.state
+
+    if (!isLoaded(auth)) {
+      return (<Typography>ログイン中...</Typography>)
+    }
+    if (isEmpty(auth)) {
+      return (
+        <Button variant="contained" color="primary" onClick={loginWithGoogle}>Googleアカウントでログイン</Button>
+      )
+    }
     return (
-      <Button variant="contained" color="primary" onClick={loginWithGoogle}>Googleアカウントでログイン</Button>
-    )
+      <React.Fragment>
+        {profile.avatarUrl && <Avatar alt={profile.displayName} src={profile.avatarUrl} className={classes.avatar} />}
+        <Button color="inherit" aria-owns={anchorEl ? 'user-menu' : undefined} aria-haspopup="true"
+          onClick={this.handleClick}  className={classes.userName}>
+          {profile.displayName} さん
+        </Button>
+        <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={this.handleClose}
+        >
+          <MenuItem onClick={logout}>ログアウト</MenuItem>
+        </Menu>
+      </React.Fragment>
+    );
   }
-  return (
-    <React.Fragment>
-      {profile.avatarUrl && <Avatar alt={profile.displayName} src={profile.avatarUrl} className={classes.avatar} />}
-      <Typography color="inherit">{profile.displayName} さん</Typography>
-      <Button color="inherit" onClick={logout}>ログアウト</Button>
-    </React.Fragment>
-  );
 }
 
 Login.propTypes = {
