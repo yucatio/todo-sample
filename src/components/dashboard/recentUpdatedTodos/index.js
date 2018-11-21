@@ -56,7 +56,8 @@ RecentUpdatedTodos.propTypes = {
         _updatedAt: PropTypes.number.isRequired
       }).isRequired
     })
-  )
+  ),
+  classes: PropTypes.object.isRequired,
 }
 
 const firebaseQueries = ({uid}) => (

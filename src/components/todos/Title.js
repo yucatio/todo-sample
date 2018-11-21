@@ -31,6 +31,7 @@ Title.propTypes = {
   displayName: PropTypes.string,
   avatarUrl: PropTypes.string,
   isOwnTodos: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 const firebaseQueries = ({uid}) => (

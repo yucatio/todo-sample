@@ -40,7 +40,8 @@ Login.propTypes = {
     avatarUrl: PropTypes.string
   }).isRequired,
   loginWithGoogle: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

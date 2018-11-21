@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import RecentUpdatedTodos from './recentUpdatedTodos/'
 
@@ -19,5 +20,9 @@ const Dashboard = ({classes}) => (
     </div>
   </div>
 )
+
+Dashboard.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
 
 export default withStyles(styles)(Dashboard)

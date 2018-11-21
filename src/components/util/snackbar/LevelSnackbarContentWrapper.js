@@ -40,8 +40,7 @@ const styles = theme => ({
   },
 })
 
-let LevelSnackbarContent = (props) => {
-  const { classes, className, message, onClose, variant, ...other } = props;
+const LevelSnackbarContent = ({ classes, className, message, onClose, variant, ...other }) => {
   const Icon = variantIcon[variant];
 
   return (
