@@ -3,6 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
 import AddTodo from '../../containers/todos/AddTodo'
 import { locationChangeOnTodos } from '../../actions/todoActions'
 import VisibleTodoList from '../../containers/todos/VisibleTodoList'
@@ -16,6 +17,7 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3,
   },
 });
 
@@ -33,11 +35,11 @@ class TodoComponent extends React.Component {
     const {isOwnTodos, match: { params: {uid}}, classes} = this.props;
     return (
       <div className={classes.todoRoot}>
-        <main className={classes.content}>
+        <Paper className={classes.content}>
           <Title isOwnTodos={isOwnTodos} uid={uid} />
           {isOwnTodos && <AddTodo uid={uid} />}
           <VisibleTodoList uid={uid} isOwnTodos={isOwnTodos} />
-        </main>
+        </Paper>
         <FilterNav />
       </div>
    )

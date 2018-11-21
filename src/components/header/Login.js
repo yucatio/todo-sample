@@ -38,7 +38,7 @@ class Login extends React.Component {
     const { anchorEl } = this.state
 
     if (!isLoaded(auth)) {
-      return (<Typography>ログイン中...</Typography>)
+      return (<Typography color="inherit">ログイン中...</Typography>)
     }
     if (isEmpty(auth)) {
       return (
@@ -47,11 +47,11 @@ class Login extends React.Component {
     }
     return (
       <React.Fragment>
-        {profile.avatarUrl && <Avatar alt={profile.displayName} src={profile.avatarUrl} className={classes.avatar} />}
         <Button color="inherit" aria-owns={anchorEl ? 'user-menu' : undefined} aria-haspopup="true"
           onClick={this.handleClick}  className={classes.userName}>
           {profile.displayName} さん
         </Button>
+        {profile.avatarUrl && <Avatar alt={profile.displayName} src={profile.avatarUrl} className={classes.avatar} />}
         <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
