@@ -3,16 +3,34 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
 import UserUpdatedTodos from './UserUpdatedTodo'
 
-const RecentUpdatedList = (todos) => {
+const styles = theme => ({
+  recentUpdate: {
+    maxWidth: 800,
+    marginLeft  : 'auto',
+    marginRight : 'auto'
+  },
+  title: {
+    paddingTop: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 3,
+    paddingRight: theme.spacing.unit * 3,
+  },
+  message: {
+    padding: theme.spacing.unit * 3,
+  }
+})
+
+const RecentUpdatedList = (todos, classes) => {
   if (!isLoaded(todos)) {
-    return <Typography>読み込み中…</Typography>
+    return <Typography className={classes.message}>読み込み中…</Typography>
   }
   if (isEmpty(todos)) {
-    return <Typography>データがありません。</Typography>
+    return <Typography className={classes.message}>データがありません。</Typography>
   }
   return (
     <List>
@@ -23,11 +41,11 @@ const RecentUpdatedList = (todos) => {
   )
 }
 
-const RecentUpdatedTodos = ({todos}) => (
-  <div>
-    <Typography variant="h5">最近の更新</Typography>
-    {RecentUpdatedList(todos)}
-  </div>
+const RecentUpdatedTodos = ({todos, classes}) => (
+  <Paper className={classes.recentUpdate}>
+    <Typography variant="h5" className={classes.title}>最近の更新</Typography>
+    {RecentUpdatedList(todos, classes)}
+  </Paper>
 )
 
 RecentUpdatedTodos.propTypes = {
@@ -59,6 +77,7 @@ const mapStateToProps = ({firebase: {ordered : {recentUpdatedTodos}}}) => {
 }
 
 export default compose(
+  withStyles(styles),
   firebaseConnect(firebaseQueries),
   connect(
    mapStateToProps

@@ -18,7 +18,6 @@ const styles = {
 }
 
 const Title = ({displayName, avatarUrl, isOwnTodos, classes}) => {
-  console.log('avatarUrl', avatarUrl)
   const name = isOwnTodos ? 'あなた' : `${displayName} さん`;
   return (
     <div className={classes.row}>
