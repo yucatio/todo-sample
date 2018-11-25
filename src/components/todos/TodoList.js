@@ -1,17 +1,25 @@
 import React from 'react'
 import { isEmpty, isLoaded } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 import Todo from './Todo'
 
-const TodoList = ({todos, isOwnTodos, todoStatuses, onTodoClick}) => {
+const styles = theme => ({
+  message: {
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
+  },
+});
+
+const TodoList = ({todos, isOwnTodos, todoStatuses, onTodoClick, classes}) => {
   if (!isLoaded(todos)) {
-    return <CircularProgress />
+    return <CircularProgress className={classes.message} />
   }
   if (isEmpty(todos)) {
-    return <Typography>タスクがありません。</Typography>
+    return <Typography className={classes.message} variant="body1">タスクがありません。</Typography>
   }
 
   return (
@@ -48,4 +56,4 @@ TodoList.propTypes = {
   onTodoClick: PropTypes.func.isRequired
 }
 
-export default TodoList;
+export default withStyles(styles)(TodoList)

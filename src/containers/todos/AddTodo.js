@@ -1,16 +1,26 @@
 import React from 'react'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { addTodo } from '../../actions/todoActions'
 
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+  }
+})
+
+
 class AddTodo extends React.Component {
   render() {
-    const {uid, dispatch} = this.props
+    const {uid, dispatch, classes} = this.props
 
     return (
-      <div>
+      <div className={classes.root}>
         <form
           onSubmit={ e => {
             e.preventDefault()
@@ -37,7 +47,11 @@ class AddTodo extends React.Component {
 }
 
 AddTodo.propTypes = {
-  uid: PropTypes.string.isRequired
+  uid: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
-export default connect()(AddTodo)
+export default compose(
+  withStyles(styles),
+  connect()
+)(AddTodo)

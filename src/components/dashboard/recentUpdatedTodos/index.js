@@ -7,25 +7,29 @@ import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import UserUpdatedTodos from './UserUpdatedTodo'
 
 const styles = theme => ({
   title: {
     paddingTop: theme.spacing.unit * 3,
-    paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 3,
   },
   message: {
-    padding: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit * 3,
   }
 })
 
 const RecentUpdatedList = (todos, classes) => {
   if (!isLoaded(todos)) {
-    return <Typography className={classes.message}>読み込み中…</Typography>
+    return <CircularProgress className={classes.message} />
   }
   if (isEmpty(todos)) {
-    return <Typography className={classes.message}>データがありません。</Typography>
+    return <Typography className={classes.message} variant="body1">データがありません。</Typography>
   }
   return (
     <List>

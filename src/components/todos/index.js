@@ -11,15 +11,20 @@ import Title from './Title'
 import FilterNav from './FilterNav'
 
 const styles = theme => ({
-  todoRoot: {
+  root: {
     display: 'flex',
   },
-  content: {
+  todoListRoot: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    margin: theme.spacing.unit * 3,
   },
-});
+  todoListContent: {
+    maxWidth: 950,
+    padding: theme.spacing.unit * 3,
+    marginLeft  : 'auto',
+    marginRight : 'auto'
+  },
+})
 
 class TodoComponent extends React.Component {
   componentWillMount() {
@@ -34,12 +39,14 @@ class TodoComponent extends React.Component {
   render() {
     const {isOwnTodos, match: { params: {uid}}, classes} = this.props;
     return (
-      <div className={classes.todoRoot}>
-        <Paper className={classes.content}>
-          <Title isOwnTodos={isOwnTodos} uid={uid} />
-          {isOwnTodos && <AddTodo uid={uid} />}
-          <VisibleTodoList uid={uid} isOwnTodos={isOwnTodos} />
-        </Paper>
+      <div className={classes.root}>
+        <div className={classes.todoListRoot}>
+          <Paper className={classes.todoListContent}>
+            <Title isOwnTodos={isOwnTodos} uid={uid} />
+            {isOwnTodos && <AddTodo uid={uid} />}
+            <VisibleTodoList uid={uid} isOwnTodos={isOwnTodos} />
+          </Paper>
+        </div>
         <FilterNav />
       </div>
    )

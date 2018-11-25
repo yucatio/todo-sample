@@ -48,7 +48,7 @@ class Login extends React.Component {
     return (
       <React.Fragment>
         <Button color="inherit" aria-owns={anchorEl ? 'user-menu' : undefined} aria-haspopup="true"
-          onClick={this.handleClick}  className={classes.userName}>
+          onClick={this.handleClick} className={classes.userName}>
           {profile.displayName} さん
         </Button>
         {profile.avatarUrl && <Avatar alt={profile.displayName} src={profile.avatarUrl} className={classes.avatar} />}

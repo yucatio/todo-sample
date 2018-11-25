@@ -3,14 +3,15 @@ import PropTypes from 'prop-types'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@material-ui/core/Tooltip'
+import green from '@material-ui/core/colors/green'
 import { Done, CheckBoxOutlineBlank, CallMade, Error } from '@material-ui/icons'
 
 const CheckIcon = (isOwnTodos, completed) => {
   if (completed) {
     return (
       <ListItemIcon>
-        <Done />
+        <Done nativeColor={green[500]} />
       </ListItemIcon>
     )
   }
