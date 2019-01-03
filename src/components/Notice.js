@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar'
 import { closeNotice } from '../actions/todoActions'
 import LevelSnackbarContentWrapper from './util/snackbar/LevelSnackbarContentWrapper'
 

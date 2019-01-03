@@ -50,10 +50,10 @@ TodoList.propTypes = {
   todoStatuses: PropTypes.objectOf(
     PropTypes.shape({
       status: PropTypes.oneOf(['sending', 'success', 'error']).isRequired,
-      message: PropTypes.string
     })
   ).isRequired,
-  onTodoClick: PropTypes.func.isRequired
+  onTodoClick: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(TodoList)

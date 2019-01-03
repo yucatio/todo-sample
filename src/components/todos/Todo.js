@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ListItem from '@material-ui/core/ListItem';
+import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Tooltip from '@material-ui/core/Tooltip'
 import green from '@material-ui/core/colors/green'
-import { Done, CheckBoxOutlineBlank, CallMade, Error } from '@material-ui/icons'
+import Done from '@material-ui/icons/Done'
+import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank'
+import CallMade from '@material-ui/icons/CallMade'
+import Error from '@material-ui/icons/Error'
 
 const CheckIcon = (isOwnTodos, completed) => {
   if (completed) {
@@ -33,19 +36,20 @@ const StatusIcon = (todoStatus) => {
 
   if (todoStatus.status === 'sending') {
     return (
-        <Tooltip title="送信中">
-          <CallMade />
+      <Tooltip title="送信中">
+        <CallMade />
       </Tooltip>
     )
   }
   if (todoStatus.status === 'error') {
     return (
-        <Tooltip title="エラー">
-          <Error />
+      <Tooltip title="エラー">
+        <Error />
       </Tooltip>
     )
   }
 
+  return null
 }
 
 const Todo = ({isOwnTodos, onClick, todoId, completed, text, todoStatus}) => (
@@ -54,8 +58,7 @@ const Todo = ({isOwnTodos, onClick, todoId, completed, text, todoStatus}) => (
     onClick={onClick}
     >
     {CheckIcon(isOwnTodos, completed)}
-    <ListItemText
-      inset>
+    <ListItemText inset>
       <span style={ {textDecoration: completed ? 'line-through' : 'none'}}>{text}</span>
     </ListItemText>
     {StatusIcon(todoStatus)}

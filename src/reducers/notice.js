@@ -16,7 +16,7 @@ const notice = (state = INITIAL_STATE, action) => {
     case CLOSE_NOTICE :
       return { ...state, open: false }
     case LOCATION_CHANGE_ON_TODOS :
-    return { ...state, open: false }
+      return { ...state, open: false }
     default:
       return state
   }

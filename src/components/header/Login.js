@@ -5,17 +5,17 @@ import PropTypes from 'prop-types'
 import { isLoaded, isEmpty } from 'react-redux-firebase'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { loginWithGoogle, logout } from '../../actions/authActions'
 
 const styles = {
   avatar: {
     margin: 10,
   },
-  userName: {
+  noTransform: {
     textTransform: 'none',
   }
 }
@@ -38,21 +38,22 @@ class Login extends React.Component {
     const { anchorEl } = this.state
 
     if (!isLoaded(auth)) {
-      return (<Typography color="inherit">ログイン中...</Typography>)
+      return <CircularProgress color="inherit" />
     }
     if (isEmpty(auth)) {
       return (
-        <Button variant="contained" color="primary" onClick={loginWithGoogle}>Googleアカウントでログイン</Button>
+        <Button variant="contained" color="primary" onClick={loginWithGoogle} className={classes.noTransform}>Googleアカウントでログイン</Button>
       )
     }
     return (
       <React.Fragment>
         <Button color="inherit" aria-owns={anchorEl ? 'user-menu' : undefined} aria-haspopup="true"
-          onClick={this.handleClick} className={classes.userName}>
+          onClick={this.handleClick} className={classes.noTransform}>
           {profile.displayName} さん
         </Button>
         {profile.avatarUrl && <Avatar alt={profile.displayName} src={profile.avatarUrl} className={classes.avatar} />}
         <Menu
+            id="user-menu"
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={this.handleClose}

@@ -22,7 +22,7 @@ const Title = ({displayName, avatarUrl, isOwnTodos, classes}) => {
   return (
     <div className={classes.row}>
       {avatarUrl && <Avatar alt={displayName} src={avatarUrl} className={classes.avatar} />}
-      {displayName && <Typography variant="h5">{name}のタスク一覧</Typography>}
+      {displayName && <Typography variant="h5" gutterBottom>{name}のタスク一覧</Typography>}
     </div>
   )
 }

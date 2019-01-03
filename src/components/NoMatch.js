@@ -1,10 +1,8 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 
 const NoMatch = () => (
-  <div>
-    <Typography variant="h1">Page Not Found</Typography>
-  </div>
+  <Typography variant="h1">ページが見つかりません</Typography>
 )
 
 export default NoMatch;

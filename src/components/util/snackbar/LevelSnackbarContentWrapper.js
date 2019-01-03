@@ -1,10 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames';
+import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
-import { CheckCircle, Error, Info, Close, Warning} from '@material-ui/icons'
+import CheckCircle from '@material-ui/icons/CheckCircle'
+import Error from '@material-ui/icons/Error'
+import Info from '@material-ui/icons/Info'
+import Close from '@material-ui/icons/Close'
+import Warning from '@material-ui/icons/Warning'
 import { green, amber } from '@material-ui/core/colors'
 
 const variantIcon = {
