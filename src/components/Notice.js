@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Snackbar from '@material-ui/core/Snackbar'
-import { closeNotice } from '../actions/todoActions'
+import { closeNotice } from '../actions/noticeActions'
 import LevelSnackbarContentWrapper from './util/snackbar/LevelSnackbarContentWrapper'
 
 const Notice = ({ notice, handleClose }) => (

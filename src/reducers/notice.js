@@ -1,5 +1,5 @@
 import { NOT_AUTHENTICATED_ON_TODO_ACTION, ADD_TODO_ERROR, TOGGLE_TODO_ERROR,
-  LOCATION_CHANGE_ON_TODOS, CLOSE_NOTICE}
+  LOCATION_CHANGE_ON_TODOS, LOGOUT_SUCCESS, CLOSE_NOTICE}
    from '../actions/'
 
 const INITIAL_STATE = { text: '', level: 'info', open: false }
@@ -16,6 +16,7 @@ const notice = (state = INITIAL_STATE, action) => {
     case CLOSE_NOTICE :
       return { ...state, open: false }
     case LOCATION_CHANGE_ON_TODOS :
+    case LOGOUT_SUCCESS :
       return { ...state, open: false }
     default:
       return state

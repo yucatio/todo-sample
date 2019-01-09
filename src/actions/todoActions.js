@@ -1,15 +1,11 @@
 import moment from 'moment'
-import {LOCATION_CHANGE_ON_TODOS, CLOSE_NOTICE, ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
+import {LOCATION_CHANGE_ON_TODOS, ADD_TODO_REQUEST, ADD_TODO_SUCCESS, ADD_TODO_ERROR,
   TOGGLE_TODO_REQUEST, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_ERROR,
   NOT_AUTHENTICATED_ON_TODO_ACTION}
    from './'
 
 export const locationChangeOnTodos = () => ({
   type: LOCATION_CHANGE_ON_TODOS
-})
-
-export const closeNotice = () => ({
-  type: CLOSE_NOTICE
 })
 
 const addTodoRequest = (todoId) => ({

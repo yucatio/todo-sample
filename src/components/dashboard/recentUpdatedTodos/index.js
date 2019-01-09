@@ -51,14 +51,7 @@ RecentUpdatedTodos.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string.isRequired,
-      value: PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        eventType: PropTypes.string.isRequired,
-        uid: PropTypes.string.isRequired,
-        displayName: PropTypes.string.isRequired,
-        avatarUrl: PropTypes.string,
-        _updatedAt: PropTypes.number.isRequired
-      }).isRequired
+      value: PropTypes.object.isRequired,
     })
   ),
   classes: PropTypes.object.isRequired,

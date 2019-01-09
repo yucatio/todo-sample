@@ -47,11 +47,7 @@ TodoList.propTypes = {
     })
   ),
   isOwnTodos: PropTypes.bool.isRequired,
-  todoStatuses: PropTypes.objectOf(
-    PropTypes.shape({
-      status: PropTypes.oneOf(['sending', 'success', 'error']).isRequired,
-    })
-  ).isRequired,
+  todoStatuses: PropTypes.object.isRequired,
   onTodoClick: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
 }
