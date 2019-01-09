@@ -1,23 +1,36 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Navbar from './navbar/'
+import PropTypes from 'prop-types'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { withStyles } from '@material-ui/core/styles'
+import Header from  './header/'
 import Dashboard from './dashboard/'
-import Login from './login/'
 import TodoComponent from './todos/'
 import NoMatch from './NoMatch'
+import Notice from './Notice'
 
-const App = () => (
+const styles = theme => ({
+  toolbar: theme.mixins.toolbar,
+});
+
+const App = ({classes}) => (
   <BrowserRouter>
     <div>
-      <Login />
-      <Navbar />
+      <CssBaseline />
+      <Header />
+      <div className={classes.toolbar} />
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/users/:uid/todos" component={TodoComponent} />
         <Route component={NoMatch} />
       </Switch>
+      <Notice />
     </div>
   </BrowserRouter>
 )
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(App);

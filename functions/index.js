@@ -6,11 +6,12 @@ admin.initializeApp();
 const MAX_RECENT_UPDATED_TODOS = 10;
 
 const addRecentUpdate = (uid, todoId, todo, eventType) => {
-  return admin.database().ref('/users/' + uid + '/displayName').once('value').then((snapshot) => {
-    const displayName = snapshot.val();
+  return admin.database().ref('/users/' + uid).once('value').then((snapshot) => {
+    const user = snapshot.val();
     return (admin.database().ref('/recentUpdatedTodos/' + todoId).set({
       uid,
-      displayName,
+      displayName: user.displayName,
+      avatarUrl: user.avatarUrl,
       text: todo.text,
       eventType,
       _updatedAt: todo._updatedAt

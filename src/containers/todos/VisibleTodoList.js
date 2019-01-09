@@ -33,32 +33,25 @@ const getVisibleTodos = (todos, filter) => {
 }
 
 const firebaseQueries = ({uid}) => (
-  [
-    {path: `users/${uid}/displayName`, type: 'once'},
-    `todos/${uid}`
-  ]
+  [ `todos/${uid}` ]
 )
 
-const mapStateToProps = ({visibilityFilter, firebase: {auth, data : {todos, users}}}, {uid}) => {
+const mapStateToProps = ({todoStatuses, visibilityFilter, firebase: {auth, data : {todos, users}}}, {uid}) => {
   return {
-    displayName: users && users[uid] &&　users[uid].displayName,
     todos: getVisibleTodos(todos && todos[uid], visibilityFilter),
+    todoStatuses
   }
 }
 
-const mapDispatchToProps = (dispatch, {uid}) => {
-  return {
-    onTodoClick: (id) => {
-      dispatch(toggleTodo(uid, id))
-    }
+const mapDispatchToProps = (dispatch, {uid}) => ({
+  onTodoClick: (id) => {
+    dispatch(toggleTodo(uid, id))
   }
-}
+})
 
-const VisibleTodoList = compose(
+export default compose(
   firebaseConnect(firebaseQueries),
   connect(
    mapStateToProps,
    mapDispatchToProps
 ))(TodoList)
-
-export default VisibleTodoList;
